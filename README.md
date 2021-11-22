@@ -1,0 +1,3 @@
+# KaggleHandPrediction
+
+.ipyb_checkpoints/
