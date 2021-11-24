@@ -25,7 +25,7 @@ def train_test(dataset):
     x_scale=min_max_scaler.fit_transform(x)
     df=pd.DataFrame(x_scale)
     df[64]=dataset[64].values
-    train,test=train_test_split(dataset,test_size=0.1)
+    train,test=train_test_split(df,test_size=0.1)
     entrenar,validar=train_test_split(train,test_size=0.3)
     
     y_t=entrenar[64].to_numpy()
@@ -44,7 +44,6 @@ if __name__ == '__main__':
     dataset=load_dataset()
     x_t,y_t,x_v,y_v=train_test(dataset)
     
-    
 
     """ Bagging and boosting algorithms"""
     ens=Ensembler(x_t,y_t,x_v,y_v)
@@ -58,6 +57,7 @@ if __name__ == '__main__':
     #svm.get_best_C()
     svm.SVM_gaussian()
     svm.SVM_polynomial()
+    svm.SVM_Linear()
     
     """Logistic regression"""
     log_regression=Logistic_regression=LogisticRegresion(x_t,y_t,x_v,y_v)
@@ -65,7 +65,7 @@ if __name__ == '__main__':
     """KNN algorithm"""
     knn=KNN(x_t,y_t,x_v,y_v)
     #Set bes K for knn algorithm with cross validation
-    #knn.get_best_neighbours()
+    knn.get_best_neighbours()
     
     knn.KNN_Classifier()
     """ DECISION TREE"""
